@@ -15,30 +15,35 @@
   /* =========================
     Reset general
   ========================= */
-  *{ margin:0; padding:0; box-sizing:border-box; }
+  *{ margin:0; padding:0; max-width: 100%; box-sizing:border-box; }
 
   html,body{ 
-
-   width: 100%;
+    
    margin: 0%;
    padding: 0%;
+   overflow-x: hidden;
+   display: flex;
+   justify-content: center;
+   align-items: center;
   }
 
   body {
+
+     background: linear-gradient(to right, rgba(241, 199, 59, 0.925), rgba(226, 221, 203, 0.689));
+   width: 100%;
     background-image: url("Imagen_Principal_Metro");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex;   
     flex-direction: column;
+    box-sizing: border-box;
 
    }
 
    .Imagen_Principal_Metro{
     width: 100%;
-    height: 300px;
+    height: 500px;
    }
 
   /* Tipografías */
@@ -49,24 +54,23 @@
   header{   
   width: 100%; 
   height: 100%;
-  background-color:black;  
+   background: linear-gradient(to right, rgba(245, 21, 21, 0.789), rgba(221, 178, 35, 0.867));
   display: flex;
   justify-content: space-between;
-
-
+  
   }
 
 .Titulo_1{
 font-size: 1rem; 
-color: white;
+color: rgb(106, 114, 230);
 cursor: pointer;
 padding: 30px 15px 30px 30px;
 }
 
 .Titulo_1:hover{
-  color: red;
+  color:rgb(106, 114, 230);
   transform: scale(1.1);
-  text-shadow: 2px 2px 5px gray;
+  text-shadow: 2px 2px 5px rgb(58, 152, 214);
 }
 
 
@@ -89,7 +93,7 @@ cursor: pointer;
 }
 
 .perfil:hover{
-  color: red;
+  color: rgb(106, 114, 230);
   transform: scale(1.5);
   text-shadow: 2px 2px 5px gray;
 }
@@ -102,7 +106,7 @@ cursor: pointer;
 }
 
 .carro_compra:hover {
-  color: red;
+  color: rgb(106, 114, 230);
   transform: scale(1.5);
   text-shadow: 2px 2px 5px gray;
 }
@@ -114,15 +118,15 @@ cursor: pointer;
 }
 
 .configuracion:hover {
-  color: red;
+  color: rgb(106, 114, 230);
   transform: scale(1.5);
   text-shadow: 2px 2px 5px gray;
 }
 
 
 .Menu_Navegacion{
-  background-color: darkgray;
-  color: black;
+  background: linear-gradient(to right, rgba(175, 60, 60, 0.650), rgba(249, 216, 108, 0.689));
+  color: rgb(106, 114, 230);
   width: 100%;  
   height: 20px;
   display: flex;
@@ -134,13 +138,296 @@ cursor: pointer;
 }
 
 .enlace_navegacion:hover {
-  color:black;
+  color:rgb(36, 73, 238);
   font-weight: bold;
   transform: scale(1.1);
   text-shadow: 2px 2px 5px gray;
-  text-decoration: underline;
-  
-
    
 }
 
+
+.cajas_centrales{
+ 
+   
+  justify-content: space-around; 
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+     
+}
+
+.boton-interactivo{
+  margin: 20px 20px 20px 20px;
+  width: 300px;
+  height: 100px; 
+  border-radius: 50px;
+  font-size: 25px;
+  background: linear-gradient(to right, rgba(139, 65, 65, 0.536), rgba(249, 216, 108, 0.689));
+}
+
+.boton-interactivo:hover {
+  font-weight: bold; 
+  transform: scale(1.1);
+  text-shadow: 2px 2px 5px gray; 
+  background-image: url("mapa.png");
+  background-size: cover; 
+  background-position: center;
+  transition: all 0.5s ease;    
+  }
+
+.boton-Ocio{ 
+   margin: 20px 20px 20px 20px;
+    width: 300px;
+  height: 100px; 
+  border-radius: 50px;
+  font-size: 24px;
+  background: linear-gradient(to right, rgba(139, 65, 65, 0.536), rgba(249, 216, 108, 0.689));
+  
+}
+
+.boton-Ocio:hover{
+  font-weight: bold; 
+  transform: scale(1.1);
+  text-shadow: 2px 2px 5px gray;  
+  background-image: url("Ocio_Bogota.jpg");
+  background-size: cover; 
+  background-position: center;
+  transition: all 0.5s ease; 
+}
+
+.boton-Servicios{ 
+   margin: 20px 20px 20px 20px;
+  width: 300px;
+  height: 100px; 
+  border-radius: 50px;
+  font-size: 24px;
+  background: linear-gradient(to right, rgba(139, 65, 65, 0.536), rgba(249, 216, 108, 0.689));
+  
+}
+
+.boton-Servicios:hover{
+  font-weight: bold; 
+  transform: scale(1.1);
+  text-shadow: 2px 2px 5px gray;  
+  background-image: url("Servicios.jpg");
+  background-size: cover; 
+  background-position: center;
+  transition: all 0.5s ease; 
+}
+
+
+.boton-Estaciones{ 
+   margin: 20px 20px 20px 20px;
+   width: 300px;
+  height: 100px; 
+   
+  border-radius: 50px;
+  font-size: 24px;
+  background: linear-gradient(to right, rgba(139, 65, 65, 0.536), rgba(249, 216, 108, 0.689));
+  
+}
+
+.boton-Estaciones:hover{
+  font-weight: bold; 
+  transform: scale(1.1);
+  text-shadow: 2px 2px 5px gray;  
+  background-image: url("Estaciones.jpg");
+  background-size: cover; 
+  background-position: center;
+  transition: all 0.5s ease; 
+}
+.boton-Juegos{ 
+   margin: 20px 20px 20px 20px;
+   width: 300px;
+  height: 100px; 
+  border-radius: 50px;
+  font-size: 24px;
+  background: linear-gradient(to right, rgba(139, 65, 65, 0.536), rgba(249, 216, 108, 0.689));
+  
+}
+
+.boton-Juegos:hover{
+  font-weight: bold; 
+  transform: scale(1.1);
+  text-shadow: 2px 2px 5px gray;  
+  background-image: url("Juegos.webp");
+  background-size: cover; 
+  background-position: center;
+  transition: all 0.5s ease; 
+}
+
+.boton-Lineas{ 
+   margin: 20px 20px 20px 20px;
+  width: 300px;
+  height: 100px;  
+  border-radius: 50px;
+  font-size: 24px;
+  background: linear-gradient(to right, rgba(139, 65, 65, 0.536), rgba(249, 216, 108, 0.689));
+  
+}
+
+.boton-Lineas:hover{
+  font-weight: bold; 
+  transform: scale(1.1);
+  text-shadow: 2px 2px 5px gray;  
+  background-image: url("Linea_1.jpg");
+  background-size: cover; 
+  background-position: center;
+  transition: all 0.5s ease; 
+}
+
+.Ultimas_Noticias{
+    color: red;
+    font-size: 40px;
+    font-weight: bold;
+    width: 100%;
+    height: 100px;
+    margin: 10px;
+    padding: 26px;
+    display: flex;
+    justify-content: center;
+      
+}
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  min-height: 100dvh;
+  background: #e2d4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== Slider ===== ===== ===== ===== ===== ===== ===== ===== ===== */
+.slider-container {
+  width: min(100%, 700px);
+  border: 3px solid #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out; /*Q tan lento o rapido pasa de imagen a imagen*/
+}
+
+.slide {
+  min-width: 100%;
+  aspect-ratio: 16 / 9; /*Relacion de aspecto de las  imagenes*/
+}
+
+.slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== Botones ===== */
+.buttons {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  padding: 0 15px;
+}
+
+button {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: 0;
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* ===== Dots ===== */
+.dots-container {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.4s;
+}
+
+.dot.active {
+  background: tomato;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  button {
+    display: none;
+  }
+}
+
+
+
+.contactenos{
+  width: 100%;
+  display: flex;
+  justify-content: center;   /* centra horizontal */
+  align-items: center;
+  gap: 150px;                /* espacio entre columnas */
+  background-color: #13abd9;
+  color: white;
+  text-align: center;        /* centra texto */
+}
+
+.movil_whatsapp,
+.sedes{
+  display: flex;
+  flex-direction: row;
+   /* icono arriba, texto abajo */
+  align-items: center;       /* centra contenido */
+  margin: 50px 0;
+  font-size: 40px;
+}
+
+.contacto_p1,
+.contacto_p2{
+  font-size: 20px;
+  margin-top: 10px;
+  
+}
+.movil_whatsapp{
+  display: block;
+  margin: 20px;
+
+}
+.sedes{
+  margin: 50px;
+  display: block;
+
+}
