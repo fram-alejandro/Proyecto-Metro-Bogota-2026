@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tienda Oficial - MEBOG</title>
+  <script src="https://kit.fontawesome.com/c0eeba16d1.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body { margin: 0; background: #f4f4f4; font-family: 'Segoe UI', sans-serif; }
+    .tienda-wrapper { display: flex; min-height: 100vh; }
+    
+    /* Sidebar */
+    .sidebar { width: 320px; background: #fff; padding: 25px; border-right: 1px solid #ddd; display: flex; flex-direction: column; height: 100vh; position: sticky; top: 0; }
+    
+    /* Navbar Tienda */
+    .nav-tienda { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .btn-home { color: #333; font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
+    .btn-home:hover { color: #CA2C1B; transform: scale(1.1); }
+
+    .tullave-card { background: linear-gradient(135deg, #F4E561, #E1AD01); border-radius: 15px; padding: 20px; color: #333; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .tullave-card.guest { background: linear-gradient(135deg, #ccc, #999); color: #fff; }
+    
+    /* Historial */
+    .historial-cont { flex: 1; overflow-y: auto; margin-top: 20px; border-top: 2px solid #eee; padding-top: 10px; }
+    .orden-item { background: #f9f9f9; padding: 10px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; border: 1px solid #eee; transition: 0.2s; }
+    .orden-item:hover { background: #f0f0f0; border-color: #CA2C1B; }
+
+    /* Grid */
+    .main-content { flex: 1; padding: 40px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+    .card { background: #fff; padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    
+    /* Botones de Sesión */
+    .btn-session { color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; margin-top: 10px; font-weight: bold; width: 100%; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .btn-logout { background: #333; }
+    .btn-logout:hover { background: #000; }
+    .btn-login { background: #CA2C1B; }
+    .btn-login:hover { background: #a82416; }
+
+    /* Modales */
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; z-index: 9999; }
+    .modal-box { background: #fff; padding: 30px; border-radius: 20px; width: 350px; max-height: 80vh; overflow-y: auto; }
+  </style>
+</head>
+<body>
+  <div id="root-tienda"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const TiendaMEBOG = () => {
+      const [user, setUser] = useState(JSON.parse(localStorage.getItem('userMEBOG')));
+      const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('sessionActive') === 'true');
+      const [carrito, setCarrito] = useState([]);
+      const [mostrarCheckout, setMostrarCheckout] = useState(false);
+      const [ordenSeleccionada, setOrdenSeleccionada] = useState(null);
+      const [auth, setAuth] = useState({ nTarjeta: '', pass: '' });
+
+      const productos = [
+        { id: 1, nombre: "Maqueta Tren L1", precio: 85000 },
+        { id: 2, nombre: "Tarjeta Oro", precio: 15000 },
+        { id: 3, nombre: "Camiseta Oficial", precio: 35000 },
+        { id: 4, nombre: "Gorra MEBOG", precio: 25000 },
+        { id: 5, nombre: "Morral Ejecutivo", precio: 120000 },
+        { id: 6, nombre: "Chaqueta L1", precio: 180000 }
+      ];
+
+      const totalActual = carrito.reduce((acc, it) => acc + it.precio, 0);
+
+      const handleLogout = () => {
+        localStorage.setItem('sessionActive', 'false');
+        window.location.href = 'index.html';
+      };
+
+      const handleLoginRedirect = () => {
+        window.location.href = 'index.html'; // Redirige al index donde está el modal de login
+      };
+
+      const añadirAlCarrito = (p) => {
+        if (!isLoggedIn) {
+          alert("Debes iniciar sesión para añadir productos al carrito.");
+          return;
+        }
+        if (totalActual + p.precio <= user.saldo) {
+          setCarrito([...carrito, p]);
+        } else {
+          alert("Saldo insuficiente en tu tarjeta.");
+        }
+      };
+
+      const abrirCheckout = () => {
+        if (!isLoggedIn) {
+          alert("Inicia sesión para proceder al pago.");
+          return;
+        }
+        setMostrarCheckout(true);
+      };
+
+      const handlePago = (e) => {
+        e.preventDefault();
+        if (auth.nTarjeta === user.nTarjeta && auth.pass === user.pass) {
+          if (user.saldo >= totalActual) {
+            const nuevaOrden = {
+              id: "ORD-" + Math.floor(Math.random() * 9000 + 1000),
+              fecha: new Date().toLocaleString(),
+              items: [...carrito],
+              total: totalActual
+            };
+
+            const historialActualizado = user.historial ? [nuevaOrden, ...user.historial] : [nuevaOrden];
+            const nuevoUsuario = { 
+              ...user, 
+              saldo: user.saldo - totalActual,
+              historial: historialActualizado
+            };
+
+            localStorage.setItem('userMEBOG', JSON.stringify(nuevoUsuario));
+            setUser(nuevoUsuario);
+            alert("✅ ¡Pago Exitoso! Orden: " + nuevaOrden.id);
+            setCarrito([]);
+            setMostrarCheckout(false);
+            setAuth({ nTarjeta: '', pass: '' });
+          } else alert("Saldo insuficiente.");
+        } else alert("Número de tarjeta o contraseña incorrectos.");
+      };
+
+      return (
+        <div className="tienda-wrapper">
+          <aside className="sidebar">
+            <div className="nav-tienda">
+              <i className="fa-solid fa-house btn-home" title="Ir al Inicio" onClick={() => window.location.href='index.html'}></i>
+              <span style={{fontWeight:'bold', color:'#777'}}>Mi Panel</span>
+            </div>
+
+            {isLoggedIn ? (
+              <div className="tullave-card">
+                <small><b>{user.nombre}</b></small>
+                <h2 style={{margin:'10px 0'}}>${user.saldo.toLocaleString()}</h2>
+                <small>No. {user.nTarjeta}</small>
+              </div>
+            ) : (
+              <div className="tullave-card guest">
+                <small><b>Modo Invitado</b></small>
+                <h2 style={{margin:'10px 0'}}>$0</h2>
+                <small>Inicia sesión para comprar</small>
+              </div>
+            )}
+            
+            <div className="carrito-preview">
+              <h4 style={{margin:'0 0 10px'}}>Carrito ({carrito.length})</h4>
+              {carrito.length > 0 && (
+                <button onClick={abrirCheckout} style={btnRed}>PAGAR ${totalActual.toLocaleString()}</button>
+              )}
+            </div>
+
+            <div className="historial-cont">
+              <h4>Historial de Compras</h4>
+              {(!isLoggedIn || !user.historial || user.historial.length === 0) ? (
+                <p style={{fontSize:'12px', color:'#999'}}>Inicia sesión para ver tu historial.</p>
+              ) : (
+                user.historial.map((o) => (
+                  <div key={o.id} className="orden-item" onClick={() => setOrdenSeleccionada(o)}>
+                    <div style={{display:'flex', justifyContent:'space-between', fontSize:'13px'}}>
+                      <b>{o.id}</b>
+                      <span>${o.total.toLocaleString()}</span>
+                    </div>
+                    <small style={{color:'#777'}}>{o.fecha.split(',')[0]}</small>
+                  </div>
+                ))
+              )}
+            </div>
+
+            {/* BOTÓN DINÁMICO DE SESIÓN */}
+            {isLoggedIn ? (
+              <button className="btn-session btn-logout" onClick={handleLogout}>
+                <i className="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+              </button>
+            ) : (
+              <button className="btn-session btn-login" onClick={handleLoginRedirect}>
+                <i className="fa-solid fa-user"></i> Iniciar Sesión
+              </button>
+            )}
+          </aside>
+
+          <main className="main-content">
+            <h1>Catálogo Metro de Bogotá</h1>
+            <div className="grid">
+              {productos.map(p => (
+                <div key={p.id} className="card">
+                  <h4>{p.nombre}</h4>
+                  <p style={{color:'#CA2C1B', fontWeight:'bold'}}>${p.precio.toLocaleString()}</p>
+                  <button 
+                    onClick={() => añadirAlCarrito(p)}
+                    style={addBtn}
+                  >Añadir</button>
+                </div>
+              ))}
+            </div>
+          </main>
+
+          {mostrarCheckout && (
+            <div className="modal-overlay">
+              <div className="modal-box">
+                <h3 style={{color:'#CA2C1B', marginTop:0}}>Confirmar Pago</h3>
+                <form onSubmit={handlePago}>
+                  <input type="number" placeholder="No. de Tarjeta" required style={inputS} onChange={e=>setAuth({...auth, nTarjeta:e.target.value})} />
+                  <input type="password" placeholder="Contraseña" required style={inputS} onChange={e=>setAuth({...auth, pass:e.target.value})} />
+                  <button type="submit" style={btnRed}>AUTORIZAR PAGO</button>
+                  <button type="button" onClick={()=>setMostrarCheckout(false)} style={{width:'100%', background:'none', border:'none', marginTop:'10px', cursor:'pointer'}}>Cancelar</button>
+                </form>
+              </div>
+            </div>
+          )}
+
+          {ordenSeleccionada && (
+            <div className="modal-overlay">
+              <div className="modal-box">
+                <h3 style={{color:'#CA2C1B', marginTop:0}}>Detalle {ordenSeleccionada.id}</h3>
+                <p><small>{ordenSeleccionada.fecha}</small></p>
+                <hr/>
+                {ordenSeleccionada.items.map((it, idx) => (
+                  <div key={idx} style={{display:'flex', justifyContent:'space-between', fontSize:'14px', margin:'5px 0'}}>
+                    <span>{it.nombre}</span>
+                    <b>${it.precio.toLocaleString()}</b>
+                  </div>
+                ))}
+                <hr/>
+                <div style={{display:'flex', justifyContent:'space-between', fontWeight:'bold'}}>
+                  <span>Total Pagado:</span>
+                  <span style={{color:'#CA2C1B'}}>${ordenSeleccionada.total.toLocaleString()}</span>
+                </div>
+                <button onClick={() => setOrdenSeleccionada(null)} style={{...btnRed, background:'#333'}}>Cerrar</button>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    };
+
+    const btnRed = { width:'100%', padding:'12px', background:'#CA2C1B', color:'#fff', border:'none', borderRadius:'10px', cursor:'pointer', fontWeight:'bold' };
+    const addBtn = { background:'#13abd9', color:'#fff', border:'none', padding:'10px', borderRadius:'8px', cursor:'pointer', width:'100%' };
+    const inputS = { width:'100%', padding:'10px', margin:'5px 0', border:'1px solid #ddd', borderRadius:'8px', boxSizing:'border-box' };
+
+    ReactDOM.createRoot(document.getElementById('root-tienda')).render(<TiendaMEBOG />);
+  </script>
+</body>
+</html>

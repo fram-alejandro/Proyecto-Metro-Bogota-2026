@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explora MEBOG - Servicios y Ocio</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/c0eeba16d1.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    .grid-servicios {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      background: #f4f4f4;
+    }
+    .card-servicio {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s;
+      border-bottom: 5px solid var(--rojo_tren);
+    }
+    .card-servicio:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .card-servicio i {
+      font-size: 3rem;
+      color: var(--azul_cielo);
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>     
+    <div class="Titulo_1" onclick="window.location.href='index.html'"><h1>MEBOG</h1></div>   
+    <div id="user-status" style="color: white; font-weight: bold;"></div>
+  </header>
+
+  <div id="root-explora"></div>
+
+  <script type="text/babel" src="explora.js"></script>
+</body>
+</html>

@@ -1,104 +1,55 @@
 const slider = document.querySelector(".slider");
-const slide = document.querySelectorAll(".slide");
+const slides = document.querySelectorAll(".slide");
 const dotsContainer = document.querySelector(".dots-container");
-const sliderContainer = document.querySelector(".slider-container");
-
 let currentIndex = 0;
-let interval;
-//Esta variable verifica si se está pasando el mouse.
-let isHovering = false;
 
-// Crear los dots
-slide.forEach((_, index) => {
+// Crear puntos indicadores
+slides.forEach((_, i) => {
   const dot = document.createElement("div");
   dot.classList.add("dot");
+  if (i === 0) dot.classList.add("active");
+  dot.onclick = () => goToSlide(i);
   dotsContainer.appendChild(dot);
-
-  if (index === 0) dot.classList.add("active");
-
-  dot.setAttribute("data-index", index);
-  dot.addEventListener("click", () => {
-    goToSlide(index);
-  });
 });
 
 function updateSlider() {
   slider.style.transform = `translateX(${-currentIndex * 100}%)`;
-  updateDots();
+  document.querySelectorAll(".dot").forEach((dot, i) => {
+    dot.classList.toggle("active", i === currentIndex);
+  });
 }
 
 function nextSlide() {
-  currentIndex = (currentIndex + 1) % slide.length;
+  currentIndex = (currentIndex + 1) % slides.length;
   updateSlider();
 }
 
 function prevSlide() {
-  currentIndex = (currentIndex - 1 + slide.length) % slide.length;
+  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
   updateSlider();
 }
 
-function goToSlide(index) {
-  currentIndex = index;
+function goToSlide(i) {
+  currentIndex = i;
   updateSlider();
-  resetInterval();
 }
 
-function updateDots() {
-  document.querySelectorAll(".dot").forEach((dot, index) => {
-    dot.classList.toggle("active", index === currentIndex);
-  });
+// Auto slide cada 4 segundos
+setInterval(nextSlide, 4000);
+
+// Lógica para el botón de Mapa en el Index
+const btnMapa = document.getElementById('btn-mapa');
+if (btnMapa) {
+    btnMapa.onclick = () => {
+        // Abre Google Maps en una nueva ventana/pestaña
+        window.open('https://www.google.com/maps/search/Metro+de+Bogot%C3%A1', '_blank');
+    };
 }
 
-function autoSlide() {
-  nextSlide();
-}
-
-function startInterval() {
-  /*Si ya existe un intervalo, salgo la funcion, si no existe
-  creo uno nuevo.*/
-  if (interval) {
-    return;
-  }
-  interval = setInterval(autoSlide, 2000);
-}
-
-function stopInterval() {
-  clearInterval(interval);
-  interval = null;
-}
-function resetInterval() {
-  stopInterval();
-
-  // ❗ NO reinicia si el mouse está encima
-  if (!isHovering) {
-    startInterval();
-  }
-}
-
-// Iniciar el slider
-startInterval();
-
-// Reinicia al hacer click en los botones
-document.querySelector(".buttons").addEventListener("click", resetInterval);
-
-// 👇 Detecta si el usuario cambia de pestaña o vuelve
-document.addEventListener("visibilitychange", () => {
-  if (document.hidden) {
-    stopInterval(); // pausa cuando la pestaña no está visible
-  } else {
-    startInterval(); // reanuda cuando vuelves
-  }
+// El resto de botones (Ocio, Juegos, etc.) siguen yendo a explora.html
+document.querySelectorAll('.cajas_centrales button:not(#btn-mapa)').forEach(boton => {
+    boton.onclick = () => {
+        window.location.href = 'explora.html';
+    };
 });
 
-//Al pasar el mouse sobre el contenedor principal, se detiene la animación, y al sacarlo se reanuda la animacion, puedes ver la interacción a travéz de la consola del navegador.
-sliderContainer.addEventListener("mouseenter", () => {
-  isHovering = true;
-  stopInterval();
-  console.log("El mouse entró, detente!");
-});
-
-sliderContainer.addEventListener("mouseleave", () => {
-  isHovering = false;
-  startInterval();
-  console.log("El mouse salio, avanza!");
-});

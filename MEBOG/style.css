@@ -1,433 +1,132 @@
-  /* =========================
-    Tipografías y colores
-  ========================= */
-  @import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Roboto:wght@300;400;700&display=swap');
 
-  :root{
-    --amarillo_claro: #F4E561;
-    --rojo_tren: #CA2C1B;
-    --azul_cielo: #1316D9;
-    --negro: #000000;
-    --gris_claro: #D9D9D9;
-    --blanco: #ffffff;
-  }
+:root {
+  --amarillo_claro: #F4E561;
+  --rojo_tren: #CA2C1B;
+  --azul_cielo: #1316D9;
+  --blanco: #ffffff;
+}
 
-  /* =========================
-    Reset general
-  ========================= */
-  *{ margin:0; padding:0; max-width: 100%; box-sizing:border-box; }
+* { margin:0; padding:0; box-sizing:border-box; }
 
-  html,body{ 
-    
-   margin: 0%;
-   padding: 0%;
-   overflow-x: hidden;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-  }
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to right, #f1c73b, #e2ddcb);
+  overflow-x: hidden;
+}
 
-  body {
-
-     background: linear-gradient(to right, rgba(241, 199, 59, 0.925), rgba(226, 221, 203, 0.689));
-   width: 100%;
-    background-image: url("Imagen_Principal_Metro");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;   
-    flex-direction: column;
-    box-sizing: border-box;
-
-   }
-
-   .Imagen_Principal_Metro{
-    width: 100%;
-    height: 500px;
-   }
-
-  /* Tipografías */
-  h1,h2,h3,h4,h5,h6{ font-family: "Marcellus", serif; }
-  p{ font-size: 1rem; }
-
-  /*Header*/
-  header{   
+header {   
   width: 100%; 
-  height: 100%;
-   background: linear-gradient(to right, rgba(245, 21, 21, 0.789), rgba(221, 178, 35, 0.867));
+  background: linear-gradient(to right, rgba(202, 44, 27, 0.8), rgba(244, 229, 97, 0.9));
   display: flex;
   justify-content: space-between;
-  
-  }
-
-.Titulo_1{
-font-size: 1rem; 
-color: rgb(106, 114, 230);
-cursor: pointer;
-padding: 30px 15px 30px 30px;
+  padding: 15px 50px;
 }
 
-.Titulo_1:hover{
-  color:rgb(106, 114, 230);
-  transform: scale(1.1);
-  text-shadow: 2px 2px 5px rgb(58, 152, 214);
+.Titulo_1 h1 { font-family: "Marcellus", serif; color: white; cursor: pointer; }
+
+.Iconos { display: flex; gap: 30px; align-items: center; color: white; font-size: 1.5rem; }
+.Iconos div { cursor: pointer; transition: 0.3s; }
+.Iconos div:hover { color: var(--azul_cielo); transform: scale(1.2); }
+
+.Menu_Navegacion {
+  background: #333;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
 }
 
+.enlace_navegacion { color: white; text-decoration: none; cursor: pointer; font-weight: bold; }
+.enlace_navegacion:hover { color: var(--amarillo_claro); }
 
-.Iconos{
-  width: 20%; 
+.Imagen_Principal_Metro { width: 100%; height: 450px; object-fit: cover; }
+
+.cajas_centrales {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 40px;
+}
+
+.cajas_centrales button {
   height: 100px;
-  padding: 35px 40px 35px 10px;
+  border-radius: 50px;
+  border: none;
+  font-size: 1.2rem;
+  background: white;
+  cursor: pointer;
+  transition: 0.4s;
+  font-weight: bold;
+}
+
+.cajas_centrales button:hover { background: var(--amarillo_claro); transform: translateY(-5px); }
+
+/* Slider */
+.slider-container { width: 80%; margin: 20px auto; position: relative; overflow: hidden; border-radius: 15px; }
+.slider { display: flex; transition: 0.5s ease-in-out; }
+.slide { min-width: 100%; }
+.slide img { width: 100%; height: 400px; object-fit: cover; }
+
+.buttons { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); padding: 0 20px; }
+.buttons button { background: rgba(0,0,0,0.5); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
+
+.dots-container { position: absolute; bottom: 15px; width: 100%; display: flex; justify-content: center; gap: 10px; }
+.dot { width: 12px; height: 12px; background: white; border-radius: 50%; cursor: pointer; opacity: 0.5; }
+.dot.active { opacity: 1; background: var(--rojo_tren); }
+
+.contactenos { background: #13abd9; color: white; padding: 40px; display: flex; justify-content: space-around; }
+
+/* --- ESTILOS FAQ (ACORDEÓN) --- */
+.faq-container {
+  text-align: left;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 15px;
+  padding-right: 10px;
+}
+
+/* Scrollbar para FAQ */
+.faq-container::-webkit-scrollbar { width: 5px; }
+.faq-container::-webkit-scrollbar-thumb { background: #CA2C1B; border-radius: 10px; }
+
+details {
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #eee;
+  transition: 0.3s;
+}
+
+details[open] {
+  border-color: #CA2C1B;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+summary {
+  font-weight: bold;
+  cursor: pointer;
+  list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer; 
-   
 }
 
-.perfil { 
-font-size: 1rem; 
-color: white;
-cursor: pointer;
-
-}
-
-.perfil:hover{
-  color: rgb(106, 114, 230);
-  transform: scale(1.5);
-  text-shadow: 2px 2px 5px gray;
-}
-
-.carro_compra { 
-font-size: 1rem; 
-color: white;
-cursor: pointer;
-
-}
-
-.carro_compra:hover {
-  color: rgb(106, 114, 230);
-  transform: scale(1.5);
-  text-shadow: 2px 2px 5px gray;
-}
-
-.configuracion {
-  font-size: 1rem; 
-color: white;
-cursor: pointer;
-}
-
-.configuracion:hover {
-  color: rgb(106, 114, 230);
-  transform: scale(1.5);
-  text-shadow: 2px 2px 5px gray;
-}
-
-
-.Menu_Navegacion{
-  background: linear-gradient(to right, rgba(175, 60, 60, 0.650), rgba(249, 216, 108, 0.689));
-  color: rgb(106, 114, 230);
-  width: 100%;  
-  height: 20px;
-  display: flex;
-  justify-content: space-around;
-  font-size: 1rem;
-  margin: 0px 0px 0px 0px;
-  border-inline: 1px solid black;
- 
-}
-
-.enlace_navegacion:hover {
-  color:rgb(36, 73, 238);
-  font-weight: bold;
-  transform: scale(1.1);
-  text-shadow: 2px 2px 5px gray;
-   
-}
-
-
-.cajas_centrales{
- 
-   
-  justify-content: space-around; 
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-     
-}
-
-.boton-interactivo{
-  margin: 20px 20px 20px 20px;
-  width: 300px;
-  height: 100px; 
-  border-radius: 50px;
-  font-size: 25px;
-  background: linear-gradient(to right, rgba(139, 65, 65, 0.536), rgba(249, 216, 108, 0.689));
-}
-
-.boton-interactivo:hover {
-  font-weight: bold; 
-  transform: scale(1.1);
-  text-shadow: 2px 2px 5px gray; 
-  background-image: url("mapa.png");
-  background-size: cover; 
-  background-position: center;
-  transition: all 0.5s ease;    
-  }
-
-.boton-Ocio{ 
-   margin: 20px 20px 20px 20px;
-    width: 300px;
-  height: 100px; 
-  border-radius: 50px;
-  font-size: 24px;
-  background: linear-gradient(to right, rgba(139, 65, 65, 0.536), rgba(249, 216, 108, 0.689));
-  
-}
-
-.boton-Ocio:hover{
-  font-weight: bold; 
-  transform: scale(1.1);
-  text-shadow: 2px 2px 5px gray;  
-  background-image: url("Ocio_Bogota.jpg");
-  background-size: cover; 
-  background-position: center;
-  transition: all 0.5s ease; 
-}
-
-.boton-Servicios{ 
-   margin: 20px 20px 20px 20px;
-  width: 300px;
-  height: 100px; 
-  border-radius: 50px;
-  font-size: 24px;
-  background: linear-gradient(to right, rgba(139, 65, 65, 0.536), rgba(249, 216, 108, 0.689));
-  
-}
-
-.boton-Servicios:hover{
-  font-weight: bold; 
-  transform: scale(1.1);
-  text-shadow: 2px 2px 5px gray;  
-  background-image: url("Servicios.jpg");
-  background-size: cover; 
-  background-position: center;
-  transition: all 0.5s ease; 
-}
-
-
-.boton-Estaciones{ 
-   margin: 20px 20px 20px 20px;
-   width: 300px;
-  height: 100px; 
-   
-  border-radius: 50px;
-  font-size: 24px;
-  background: linear-gradient(to right, rgba(139, 65, 65, 0.536), rgba(249, 216, 108, 0.689));
-  
-}
-
-.boton-Estaciones:hover{
-  font-weight: bold; 
-  transform: scale(1.1);
-  text-shadow: 2px 2px 5px gray;  
-  background-image: url("Estaciones.jpg");
-  background-size: cover; 
-  background-position: center;
-  transition: all 0.5s ease; 
-}
-.boton-Juegos{ 
-   margin: 20px 20px 20px 20px;
-   width: 300px;
-  height: 100px; 
-  border-radius: 50px;
-  font-size: 24px;
-  background: linear-gradient(to right, rgba(139, 65, 65, 0.536), rgba(249, 216, 108, 0.689));
-  
-}
-
-.boton-Juegos:hover{
-  font-weight: bold; 
-  transform: scale(1.1);
-  text-shadow: 2px 2px 5px gray;  
-  background-image: url("Juegos.webp");
-  background-size: cover; 
-  background-position: center;
-  transition: all 0.5s ease; 
-}
-
-.boton-Lineas{ 
-   margin: 20px 20px 20px 20px;
-  width: 300px;
-  height: 100px;  
-  border-radius: 50px;
-  font-size: 24px;
-  background: linear-gradient(to right, rgba(139, 65, 65, 0.536), rgba(249, 216, 108, 0.689));
-  
-}
-
-.boton-Lineas:hover{
-  font-weight: bold; 
-  transform: scale(1.1);
-  text-shadow: 2px 2px 5px gray;  
-  background-image: url("Linea_1.jpg");
-  background-size: cover; 
-  background-position: center;
-  transition: all 0.5s ease; 
-}
-
-.Ultimas_Noticias{
-    color: red;
-    font-size: 40px;
-    font-weight: bold;
-    width: 100%;
-    height: 100px;
-    margin: 10px;
-    padding: 26px;
-    display: flex;
-    justify-content: center;
-      
-}
-
-
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+summary::after {
+  content: '+';
+  color: #CA2C1B;
+  font-size: 1.2rem;
   font-family: sans-serif;
 }
 
-body {
-  min-height: 100dvh;
-  background: #e2d4ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+details[open] summary::after { content: '-'; }
 
-/* ===== Slider ===== ===== ===== ===== ===== ===== ===== ===== ===== */
-.slider-container {
-  width: min(100%, 700px);
-  border: 3px solid #fff;
-  overflow: hidden;
-  position: relative;
-}
-
-.slider {
-  display: flex;
-  transition: transform 0.5s ease-in-out; /*Q tan lento o rapido pasa de imagen a imagen*/
-}
-
-.slide {
-  min-width: 100%;
-  aspect-ratio: 16 / 9; /*Relacion de aspecto de las  imagenes*/
-}
-
-.slider img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* ===== Botones ===== */
-.buttons {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transform: translateY(-50%);
-  padding: 0 15px;
-}
-
-button {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  border: 0;
-  font-size: 30px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
-
-/* ===== Dots ===== */
-.dots-container {
-  position: absolute;
-  left: 50%;
-  bottom: 12px;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  background-color: #fff;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background 0.4s;
-}
-
-.dot.active {
-  background: tomato;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 600px) {
-  button {
-    display: none;
-  }
-}
-
-
-
-.contactenos{
-  width: 100%;
-  display: flex;
-  justify-content: center;   /* centra horizontal */
-  align-items: center;
-  gap: 150px;                /* espacio entre columnas */
-  background-color: #13abd9;
-  color: white;
-  text-align: center;        /* centra texto */
-}
-
-.movil_whatsapp,
-.sedes{
-  display: flex;
-  flex-direction: row;
-   /* icono arriba, texto abajo */
-  align-items: center;       /* centra contenido */
-  margin: 50px 0;
-  font-size: 40px;
-}
-
-.contacto_p1,
-.contacto_p2{
-  font-size: 20px;
-  margin-top: 10px;
-  
-}
-.movil_whatsapp{
-  display: block;
-  margin: 20px;
-
-}
-.sedes{
-  margin: 50px;
-  display: block;
-
+.faq-answer {
+  padding-top: 10px;
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.4;
+  border-top: 1px dashed #ddd;
+  margin-top: 8px;
 }

@@ -1,100 +1,83 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Metro de Bogota </title>
+  <title>Metro de Bogota - MEBOG</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://kit.fontawesome.com/c0eeba16d1.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
-
 <body>
- 
-   <!-- Encabezado --> 
-  <header>      
-    <div class="Titulo_1">      
-        <h1 >MEBOG</h1>
-    </div>   
-     <div  class="Iconos">     
-        <div class="perfil"><i class="fa-solid fa-user"></i></div>
-        <div class="carro_compra"><i class="fa-solid fa-cart-shopping fa-flip-horizontal"></i></div>
-        <div class="configuracion"> <i class="fa-regular fa-circle-question"></i></div>
-    </div>    
+  
+  <header>     
+    <div class="Titulo_1"><h1>MEBOG</h1></div>   
+    <div class="Iconos">     
+      <div class="perfil" id="boton-perfil" title="Mi Cuenta">
+        <i class="fa-solid fa-user"></i>
+      </div>
+      <div class="carro_compra" id="boton-carrito" title="Tienda">
+        <i class="fa-solid fa-cart-shopping fa-flip-horizontal"></i>
+      </div>
+      <div class="preguntas_frecuentes" id="preguntas_frecuentes" title="Ayuda">
+        <i class="fa-regular fa-circle-question"></i>
+      </div>
+    </div>     
   </header>
     
-      <!-- Navegacion_principal -->
+  <nav class="Menu_Navegacion">      
+    <a class="enlace_navegacion">Tarifas y Planes</a> 
+    <a class="enlace_navegacion">Personaliza tu Tarjeta</a> 
+    <a class="enlace_navegacion">Mi Tarjeta</a> 
+    <a class="enlace_navegacion">Líneas de Metro</a>         
+    <a class="enlace_navegacion">Tienda Metro</a>     
+  </nav>     
 
-    <nav class="Menu_Navegacion">      
-      <a class="enlace_navegacion">Tarifas y Planes</a> 
-      <a class="enlace_navegacion">Recarga tu Tarjeta</a> 
-      <a class="enlace_navegacion">Mi Tarjeta</a> 
-      <a class="enlace_navegacion">Líneas de Metro</a>        
-      <a class="enlace_navegacion">Tienda Metro</a>     
-    </nav>    
-
-    <img src="img_principal.png" alt="Imagen_Principal_Metro" class="Imagen_Principal_Metro">
+  <img src="img_principal.png" alt="Metro de Bogotá" class="Imagen_Principal_Metro">
 
   <div class="cajas_centrales">
-    
-      <button class="boton-interactivo">Mapa interactivo</button>
-      <button class="boton-Ocio">Ocio</button>
-      <button class="boton-Servicios">Servicios</button>
-      <button class="boton-Estaciones">Estaciones</button> 
-      <button class="boton-Juegos">Juegos</button>
-      <button class="boton-Lineas">Lineas Metro</button>  
-    
+    <button class="boton-interactivo" id="btn-mapa">Mapa interactivo</button>
+    <button class="boton-Ocio" id="btn-ocio">Ocio</button>
+    <button class="boton-Servicios" id="btn-servicios">Servicios</button>
+    <button class="boton-Estaciones" id="btn-estaciones">Estaciones</button> 
+    <button class="boton-Juegos" id="btn-juegos">Juegos</button>
+    <button class="boton-Lineas" id="btn-lineas-info">Lineas Metro</button>  
   </div>
 
-  <div class="Ultimas_Noticias">Ultimas Noticias</div>
+  <div class="Ultimas_Noticias" style="text-align: center; font-weight: bold; padding: 20px; font-size: 1.5rem;">
+    Últimas Noticias
+  </div>
 
- <div class="slider-container">
-
+  <div class="slider-container">
     <div class="slider">
-      <div class="slide"><img src="Noticia_1.jpg" alt=""></div>
-      <div class="slide"><img src="Noticia_2.jpeg" alt=""></div>
-      <div class="slide"><img src="Noticia_3.jpg" alt=""></div>
-      <div class="slide"><img src="Novedades.jpeg" alt=""></div>
-      <div class="slide"><img src="mapa.png" alt=""></div>
-      <div class="slide"><img src="Pario Taller.jpg" alt=""></div>
+      <div class="slide"><img src="Noticia_1.jpg" alt="Avance de obra L1"></div>
+      <div class="slide"><img src="Noticia_2.jpeg" alt="Nuevos trenes"></div>
+      <div class="slide"><img src="Noticia_3.jpg" alt="Cultura Metro"></div>
     </div>
-
-    <!-- Despues de estilar el slider-->
     <div class="buttons">
-      <!-- Despues de definir la funcion prevslide -->
       <button onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i></button>
-      <!-- Despues de definir la funcion nextslide -->
       <button onclick="nextSlide()"><i class="fa-solid fa-arrow-right"></i></button>
     </div>
-
-    <!-- Despues de estilar los botones -->
-    <div class="dots-container">
-
-    </div>
-
+    <div class="dots-container"></div>
   </div>
 
   <div class="contactenos"> 
-
-  <div class="movil_whatsapp">
-    <i class="fa-brands fa-whatsapp"></i>
-    <i class="fa-solid fa-phone-volume"></i>
-    <p class="contacto_p1">
-      Atencion al Cliente <br> (601) 5553333
-    </p>
-  </div> 
-
-  <div class="sedes">
-    <i class="fa-solid fa-location-dot"></i>
-    <p class="contacto_p2">
-      Sede principal <br> Calle 26 15 - 09
-    </p>
+    <div class="movil_whatsapp">
+      <i class="fa-brands fa-whatsapp"></i><i class="fa-solid fa-phone-volume"></i>
+      <p class="contacto_p1">Atención al Cliente <br> (601) 5553333</p>
+    </div> 
+    <div class="sedes">
+      <i class="fa-solid fa-location-dot"></i>
+      <p class="contacto_p2">Sede principal <br> Calle 26 15 - 09</p>
+    </div>
   </div>
 
-</div>
+  <div id="root-registro"></div>
+
+  <script src="script.js"></script>
+  <script type="text/babel" src="Registro.js"></script>
 
 </body>
-
- <script src="script.js"></script>
 </html>
