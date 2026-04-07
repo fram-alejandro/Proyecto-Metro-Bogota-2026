@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    /*create database Bd_Metro_bogota_2;*/
+/*drop table categoria; */ 
+/*drop database bdpguia;*/
+/*describe categoria; */
+/*describe tipo_iva; */
+/*use Bd_Metro_bogota_2;
+/*drop table usuario;*/
+/*Relacion entre tablas FK*/
+/*show databases;*/
+create database Bd_Metro_bogota_2;
+use Bd_Metro_bogota_2;
+CREATE TABLE soporte( 
+id_soporte int auto_increment primary key,
+nombre varchar (100) not null, 
+correo varchar (80) not null,
+contraseña varchar(20) not null,
+telefono varchar (20) not null,
+operador_FK int,
+informacion_reporte varchar (20) not null,
+fecha_reporte datetime,
+fecha_solucion datetime,
+informe_solucion varchar (255),
+estaciones_FK int
+);
+
+CREATE TABLE recarga( 
+id_recarga int auto_increment primary key,
+cuenta_FK varchar (20) not null,
+fecha_recarga datetime,
+monto_recarga int,
+estado_recarga varchar (16) not null,
+pasajero_FK int not null);
+
+CREATE TABLE operador( 
+id_operador int auto_increment primary key,
+fecha_reporte datetime,
+fecha_registro datetime,
+id_recarga_FK int not null
+);
+
+
+
+CREATE TABLE cuenta(
+id_pasajero int,
+pasajero_FK int, 
+nuemro_tarjeta varchar(36),
+saldo int,
+fecha_creacion datetime
+);
+
+CREATE TABLE estaciones( 
+id_pasajero int auto_increment primary key,
+nombre_estacion varchar (30) not null,
+id_pasajero_FK int,
+mapa varchar(30) not null,
+lugares_interes varchar(50) not null,
+horarios varchar(50) not null,
+informacion_general varchar(100) not null
+);
+CREATE TABLE pasajero( 
+nombre_pasajero varchar (100) not null, 
+id_pasajero int auto_increment primary key,
+clave varchar(20) not null,
+telefono varchar (20) not null,
+tipo_documento varchar (20) not null,
+numero_documento varchar (20) not null,
+correo_documento varchar (80) not null,
+fecha_registro datetime,
+activo boolean,
+Recuperar_contraseña boolean
+);
+
+/**llaves foraneas*/
+
+alter table soporte
+add constraint FKsoporteoperador
+foreign key (operador_FK)
+references operador(id_operador);
+
+alter table soporte
+add constraint FKsoporteestaciones
+foreign key (estaciones_FK)
+references estaciones(id_pasajero);
+
+alter table operador
+add constraint FKoperadorrecarga
+foreign key (id_recarga_FK)
+references recarga(id_recarga);
+
+alter table recarga
+add constraint FKrecargapasajero
+foreign key (pasajero_FK)
+references pasajero(id_pasajero);
+
+alter table cuenta
+add constraint FKcuentapasajero
+foreign key (pasajero_FK)
+references pasajero(id_pasajero);
+
+    <head>
+        <title>HOLA METRO DE BOGOTA 2</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>HOLA METRO DE BOGOTA 2</div>
+    </body>
+</html>
+CREATE DATABASE Metro_Bogota_2;
