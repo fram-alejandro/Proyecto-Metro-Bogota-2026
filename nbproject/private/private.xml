@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/bogot/Documents/NetBeansProjects/Metro_Bogota/src/java/util/Conexion.java</file>
+            <file>file:/C:/Users/bogot/Documents/NetBeansProjects/Metro_Bogota/src/java/modeloDAO/pasajeroDAO.java</file>
+            <file>file:/C:/Users/bogot/Documents/NetBeansProjects/Metro_Bogota/src/java/modeloDAO/operadorDAO.java</file>
+            <file>file:/C:/Users/bogot/Documents/NetBeansProjects/Metro_Bogota/src/java/controlador/PasajeroControlador.java</file>
+            <file>file:/C:/Users/bogot/Documents/NetBeansProjects/Metro_Bogota/src/java/modeloDAO/estacionesDAO.java</file>
+            <file>file:/C:/Users/bogot/Documents/NetBeansProjects/Metro_Bogota/src/java/modeloDAO/cuentaDAO.java</file>
+            <file>file:/C:/Users/bogot/Documents/NetBeansProjects/Metro_Bogota/src/java/modeloDAO/soporteDAO.java</file>
+            <file>file:/C:/Users/bogot/Documents/NetBeansProjects/Metro_Bogota/web/registrarUsuario.jsp</file>
         </group>
     </open-files>
 </project-private>
